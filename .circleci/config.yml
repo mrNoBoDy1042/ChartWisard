@@ -8,15 +8,9 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
       - run:
           name: Run build
-          command: ssh -oStrictHostKeyChecking=no -v $USER@$IP "/opt/chartwizard/deploy.sh"
-      - persist_to_workspace:
-          root: /opt/chartwizard/
-          paths:
-            - .
+          command: ssh -oStrictHostKeyChecking=no -v $USER@$IP "./deploy-chartwizard.sh"
 
 workflows:
   version: 2
