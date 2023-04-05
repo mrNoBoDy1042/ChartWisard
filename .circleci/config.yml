@@ -4,10 +4,10 @@ orbs:
   python: circleci/python@2.1.1
 
 jobs:
-  build_to_droplet: # this can be any name you choose
-    executor: python/default # use the default executor defined within the orb
+  build_to_droplet:
+    executor: python/default
     steps:
-      - checkout # checkout source code
+      - checkout
       - python/install-packages:
           pkg-manager: pip
       - run:
@@ -18,7 +18,6 @@ jobs:
           paths:
             - .
 
-# Orchestrate our job run sequence
 workflows:
   version: 2
   build-project:
