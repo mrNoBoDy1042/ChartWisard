@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ChartWizard</title>
+        <link rel="stylesheet" href="/static/landing_page_styles.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="spacer"></div>
+            <div class="home">
+                <h2 class="header_text">ChartWizard</h2>
+            </div>
+            <div class="navigation">
+                <a href="main.html" class="button">Login / Sign up</a>
+            </div>
+        </div>
+        <div class="banner">
+            <h1 class="header_text">ChartWizard at your service!</h1>
+            <h3 class="header_text">
+                <span style="color: #854ef7">Your questions</span> + <span style="color: #007bff">Our wizardry</span> = <span style="color: #ffb500">Chart magic</span>
+            </h3>
+
+            <p>Just ask me your question and watch as I conjure up a snazzy chart in your Metabase.</p>
+            <a href="main.html" class="button">Ask the wizard</a>
+        </div>
+        <div class="spacer"></div>
+        <div class="demo">
+            <h1 class="demo_header header_text">It's visual magic! No wand waving required.</h1>
+            <div class="tutorial">
+                <div class="step">
+                    <img src="../static/img/summon_colors.png">
+                    <h4 class="header_text">Summon</h4>
+                    <p class="caption">Unleash the sorcery of data analysis</p>
+                    <p class="caption">by integrating me with your Metabase.</p>
+                </div>
+                <div class="step">
+                    <img src="../static/img/magic_ball_colors.png">
+                    <h4 class="header_text">Wonder</h4>
+                    <p class="caption">Ask your question and I will gather</p>
+                    <p class="caption">the wisdom from your data.</p>
+                </div>
+                <div class="step">
+                    <img src="../static/img/unveil_colors.png">
+                    <h4 class="header_text">Unveil</h4>
+                    <p class="caption">Your Metabase will magically unfold</p>
+                    <p class="caption">the enlightening answers.</p>
+                </div>
+            </div>
+        </div>
+        <script>
+            var step_observer = new IntersectionObserver(observerCallback);
+            function stepobserverCallback(entries, step_observer) {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add("step-slidein-animation");
+                    }
+                });
+            };
+            let step_target = '.step';
+            document.querySelectorAll(step_target).forEach((i) => {
+                if (i) {
+                    step_observer.observe(i);
+                }
+            });
+            
+            var observer = new IntersectionObserver(observerCallback);
+            function observerCallback(entries, step_observer) {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add("header-animation");
+                    }
+                });
+            };
+            let target = '.demo_header';
+            document.querySelectorAll(target).forEach((i) => {
+                if (i) {
+                    observer.observe(i);
+                }
+            });
+        </script>
+        <div class="spacer"></div>
+    </body>
+</html>

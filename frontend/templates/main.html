@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/main_styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="spacer"></div>
+        <div class="home">
+            <h2 class="header_text">ChartWizard</h2>
+        </div>
+        <div class="navigation">
+        </div>
+    </div>
+    <div class="ask-section">
+        <img class="ball-img" src="/static/img/magic_ball_colors.png"></img>
+        <div class="wrapper">
+            <div class="form_title">
+                <h1 class="header_text">What secrets shall we uncover?</h1>
+                <p>Ask me your question, and watch me as I invoke insights from your data.</p>
+            </div>
+            <form class="question_form">
+                <h3 class="header_text">Select Data Realm</h3>
+                <select name="database-select">
+                    <option value="database_1">Database 1</option>
+                    <option value="database_2">Database 2</option>
+                </select>
+                
+                <h3 class="header_text">Write your question</h3>
+                <input type="text" name="question-input">
+                <button type="submit" value="Submit">Reveal answers</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="loader-backdrop" class="loader-backdrop" style="display: none;">
+        <div class="loader"></div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

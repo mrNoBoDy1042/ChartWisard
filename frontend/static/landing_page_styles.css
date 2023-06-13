@@ -1,0 +1,214 @@
+@keyframes slideIn {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+:root {
+    --white-color: #fff;
+    --bg-color: #f0f8ff;
+    --blue-color: #007bff;
+    --hover-blue-color: #1F8BFF;
+    --grey-color: #252525;
+    --purple-color: #854ef7;
+}
+
+@font-face {
+    font-family: "Fjalla-One";
+    src: url("./fonts/Fjalla-One.ttf");
+}
+
+@font-face {
+    font-family: "Cantarell-Regular";
+    src: url("./fonts/Cantarell-Regular.ttf");
+}
+
+body {
+    font-family: "Cantarell-Regular", Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--white-color);
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding: 0px;
+    text-align: center;
+}
+
+.header_text {
+    font-family: "Fjalla-One", Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white-color);
+    background-color: var(--blue-color);
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.header .spacer {
+    width: 25%;
+}
+
+.header .home {
+    width: 50%;
+}
+
+.header .home h2{
+    margin: 0;
+}
+
+.header .navigation {
+    width: 25%;
+    margin-left: 0;
+}
+
+.header .navigation .button {
+    font-size: 1em;
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    text-decoration: none;
+    margin: 20px;
+    padding: 15px 30px 15px 30px;
+    border-radius: 25px;
+}
+
+
+.banner {
+    margin: 0;
+    justify-content: center;
+    width: 100%;
+    color: var(--grey-color);
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+    padding: 150px 0 150px 0;
+
+    background-image: url("./img/chart_background.png");
+    background-repeat: no-repeat;
+    background-position: center top -380px;
+    background-attachment: fixed;
+}
+
+.banner h1 {
+    color: var(--blue-color);
+    font-size: 2.5em;
+    margin-bottom: 5px;
+    animation: slideIn 1.2s ease-in-out;
+    animation-fill-mode: both;
+}
+
+.banner h3 {
+    animation: slideIn 1s ease-in-out;
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+}
+
+.banner p {
+    font-size: 1em;
+    margin: 30px 0px 5px 0px;
+    animation: slideIn 1s ease-in-out;
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+}
+
+.banner .button {
+    display: inline-block;
+    font-size: 1em;
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    text-decoration: none;
+    margin: 20px;
+    padding: 20px 30px 20px 30px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    animation: slideIn 1s ease-in-out;
+    animation-delay: 0.6s;
+    animation-fill-mode: both;
+}
+
+.banner .button:hover {
+    background-color: var(--hover-blue-color);
+}
+
+.demo {
+    margin: 0;
+    justify-content: center;
+    width: 90%;
+    min-width: 600px;
+    max-width: 1500px;
+    color: var(--blue-color);
+    background-color: var(--bg-color);
+    box-sizing: border-box;
+    padding-top: 20px;
+    padding-bottom: 1000px;
+    display: inline-block;
+}
+
+.spacer {
+    display: inline-block;
+}
+
+.header-animation{
+    animation: slideIn 1.2s ease-in-out;
+}
+
+.tutorial {
+    display: flex;
+    padding-top: 20px;
+    color: var(--grey-color);
+}
+
+.step-slidein-animation {
+    animation: slideIn 0.6s ease-in-out;
+}
+
+.step {
+    width: 100%;
+    flex: 1;
+    vertical-align: top;
+    text-align: center;
+    padding: 20px;
+    animation-fill-mode: both;
+}
+
+.step:nth-child(2) {
+    animation-fill-mode: both;
+    animation-delay: 0.4s;
+}
+
+.step:nth-child(3) {
+    animation-fill-mode: both;
+    animation-delay: 0.8s;
+}
+
+.step h4 {
+    margin: 15px 0 5px 0;
+}
+
+.step p {
+    font-size: 1em;
+    margin: 0px;
+}
+
+.step img {
+    height: 100px;
+    width: 100px;
+}
