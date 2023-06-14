@@ -1,6 +1,7 @@
 from typing import List
 
 from pydantic import BaseModel
+from fastapi_users.schemas import CreateUpdateDictModel
 
 
 class QuestionBase(BaseModel):
@@ -27,7 +28,7 @@ class UserBase(BaseModel):
     access_token: str
 
 
-class UserCreate(BaseModel):
+class UserCreate(CreateUpdateDictModel, BaseModel):
     email: str
     metabase_url: str
     metabase_password: str
@@ -45,7 +46,7 @@ class User(UserBase):
 class UserRead(User):
     class Config:
         fields = {
-            'access_token': {'exclude': True}
+            'access_token': {'exclude': True},
         }
 
 

@@ -1,6 +1,6 @@
 from fastapi_sessions.frontends.implementations import SessionCookie, CookieParameters
 
-from config import settings
+from app.config import settings
 
 
 cookie = SessionCookie(

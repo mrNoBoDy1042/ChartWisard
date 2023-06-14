@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-from config import settings
+from app.config import settings
 from vendors.metabase import MetabaseAPI
 
 router = APIRouter(

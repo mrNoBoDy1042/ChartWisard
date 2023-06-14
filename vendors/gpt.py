@@ -10,7 +10,7 @@ from langchain.prompts.chat import (
     HumanMessagePromptTemplate,
 )
 
-from config import settings
+from app.config import settings
 
 
 chat = ChatOpenAI(

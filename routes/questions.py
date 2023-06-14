@@ -1,11 +1,13 @@
 from typing import List
 
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from vendors import MetabaseAPI, GPTAPI
-from routes.dependencies import get_db, get_current_user
 from db import crud, schemas
+from db.dependencies import get_async_session
+from vendors import MetabaseAPI, GPTAPI
+
+from .dependencies import current_active_user
 
 
 router = APIRouter(
@@ -17,11 +19,11 @@ router = APIRouter(
     '/questions/', 
     response_model=List[schemas.Question]
 )
-def read_items(
+async def read_items(
     skip: int = 0, 
     limit: int = 100, 
-    db: Session = Depends(get_db),
-    current_user: schemas.User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_session),
+    current_user: schemas.User = Depends(current_active_user),
 ):
     questions = crud.get_questions(db, user=current_user, skip=skip, limit=limit)
     return questions
@@ -33,8 +35,8 @@ def read_items(
 )
 async def ask_question(
     question: schemas.QuestionCreate, 
-    db: Session = Depends(get_db),
-    current_user: schemas.User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_session),
+    current_user: schemas.User = Depends(current_active_user),
 ):
     crud.create_question(db=db, question=question, user_id=current_user.id)
     metabase_adapter = MetabaseAPI()

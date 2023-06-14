@@ -1,13 +1,14 @@
-from uuid import UUID, uuid4
+from uuid import UUID
 
 from fastapi import APIRouter, Response, Depends, HTTPException
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from db.schemas import SessionData
 from db import crud, schemas
+from db.dependencies import get_async_session
 from routes import cookie
-from routes.dependencies import get_db, session_backend, get_current_user
 from vendors.metabase import MetabaseAPI
+
+from .dependencies import current_active_user
 
 
 router = APIRouter(
@@ -22,11 +23,15 @@ router = APIRouter(
     response_model=schemas.UserRead,
     dependencies=[],
 )
-async def create_user(
+async def signup(
     user: schemas.UserCreate, 
     response: Response,
-    db: Session = Depends(get_db),
+    db: AsyncSession = Depends(get_async_session),
 ):
+    db_user = await crud.get_user_by_email(db, email=user.email)
+    if db_user:
+        raise HTTPException(status_code=403)
+    
     try:
         access_token = MetabaseAPI.authorize(
             email=user.email,
@@ -35,20 +40,8 @@ async def create_user(
         )
     except Exception:
         raise HTTPException(status_code=401)
-
-    db_user = crud.get_user_by_email(db, email=user.email)
-    if not db_user:
-        user.access_token = access_token
-        db_user = crud.create_user(db=db, user=user)
-    else:
-        db_user.access_token = access_token
-        db_user.save()
-
-    session = uuid4()
-    data = SessionData(email=db_user.email)
-    await session_backend.create(session, data)
-    cookie.attach_to_response(response, session)
-    
+    user.access_token = access_token
+    db_user = await crud.create_user(db=db, user=user)
     return db_user
 
 
@@ -58,7 +51,7 @@ async def create_user(
     response_model=schemas.UserRead,
 )
 def current_user(
-    current_user: schemas.User = Depends(get_current_user)
+    current_user: schemas.User = Depends(current_active_user)
 ):
     return current_user
 
@@ -68,6 +61,4 @@ async def logout_user(
     response: Response, 
     session_id: UUID = Depends(cookie),
 ):
-    await session_backend.delete(session_id)
-    cookie.delete_from_response(response)
     return

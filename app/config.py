@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     db_host: str
     db_port: str
     db_name: str
-    root_path = Path(__file__).parent.absolute()
+    root_path = Path(__file__).parent.parent.absolute()
 
 
 settings = Settings()
